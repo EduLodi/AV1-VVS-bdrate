@@ -41,13 +41,12 @@ def parse_svt_output(pt1,pt2):
 def parse_aom_output(st):
     with open(st, 'rt') as output_text:
         out_string = output_text.readlines()
-        for s in out_string:
-            if s.startswith("Stream"):
-                continue
-        bitrate_string = s.split()[9]
-        psnr_string = s.split()[5]
-        ms_string = s.split()[11]
-    return float(bitrate_string), float(psnr_string), float(ms_string)
+        for line in out_string:
+            if (line.startswith("Stream")):
+                bitrateaom_string = line.split()[9]
+                psnr_stringaom = line.split()[5]
+                ms_stringaom = line.split()[11]
+    return float(bitrateaom_string), float(psnr_stringaom), float(ms_stringaom)
 
 def append_to_csv(csv_path, encoder, qp_value, video_name, psnr_value, br_value, time_ms):
     with open(csv_path, 'a') as (csv_list):
@@ -75,15 +74,7 @@ for video in videos:
     base_yuv_name = video.split("_")[0]
 
     for qp in qps:
-        ##############################RODANDO LIBAOM_AV1############################################
-        output_path_libaom = "/home/edulodi/documents/output_aom/aom_saida_%s_qp%s.txt" % (base_yuv_name,qp)
-        aom_parameters = " limit=%s --tune=psnr --psnr" % (FRAMES_AMNT)
-        aom_parameters = " -o /home/edulodi/documents/output_aom/aom_vid_saida_%s_qp%s.webm %s" % (base_yuv_name,qp, yuv_full_path)
-        encode_cmd_aom = "%s %s &> %s" % (LIBAOM_AV1_PATH, aom_parameters, output_path_libaom)
-        os.system(encode_cmd_aom)
-        br_aom, psnr_aom, timems_aom = parse_aom_output(output_path_libaom)
-        append_to_csv(LIBAOM_AV1_SAVES_PATH, 'AOM', qp, base_yuv_name, psnr_aom, br_aom, timems_aom)
-        ########################################################################################
+
 
         ##############################RODANDO SVT_AV1###########################################
         output_path_svt = "/home/edulodi/SVT_AV1/output_files/svt_saida_%s_qp%d.txt" % (base_yuv_name, qp)
@@ -91,9 +82,19 @@ for video in videos:
         svt_parameters = " -i %s -n %i" % (yuv_full_path, FRAMES_AMNT)
         svt_parameters += " --enable-stat-report 1 --stat-file %s --lp 1" % (output_path_svt)
         svt_parameters += " --qp %d --max-qp %d --min-qp %d --rc 0" % (qp,qp,qp)
-        encode_cmd_svt = "%s %s" % (SVT_AV1_PATH, svt_parameters)
+        encode_cmd_svt = "%s %s &> %s" % (SVT_AV1_PATH, svt_parameters, output_path_svt_time)
         print(encode_cmd_svt)
         os.system(encode_cmd_svt)
         br_svt, psnr_svt, timems_svt = parse_svt_output(output_path_svt, output_path_svt_time)
         append_to_csv(SVT_AV1_SAVES_PATH, 'SVT', qp, base_yuv_name, psnr_svt, br_svt, timems_svt)
+        ########################################################################################
+
+        ##############################RODANDO LIBAOM_AV1############################################
+        output_path_libaom = "/home/edulodi/documents/output_aom/aom_saida_%s_qp%s.txt" % (base_yuv_name,qp)
+        aom_parameters = " limit=%s --tune=psnr --psnr --cq-level=%d" % (FRAMES_AMNT, qp)
+        aom_parameters = " -o /home/edulodi/documents/output_aom/aom_vid_saida_%s_qp%s.webm %s" % (base_yuv_name,qp, yuv_full_path)
+        encode_cmd_aom = "%s %s &> %s" % (LIBAOM_AV1_PATH, aom_parameters, output_path_libaom)
+        os.system(encode_cmd_aom)
+        br_aom, psnr_aom, timems_aom = parse_aom_output(output_path_libaom)
+        append_to_csv(LIBAOM_AV1_SAVES_PATH, 'AOM', qp, base_yuv_name, psnr_aom, br_aom, timems_aom)
         ########################################################################################
