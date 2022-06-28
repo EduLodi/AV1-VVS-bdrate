@@ -2,6 +2,7 @@ import os
 import csv
 from csv import writer
 import bjoontegaard_metric
+import matplotlib.pyplot as plt
 
 ###############################GENERAL CONSTANTS##################################
 YUV_PATH = "/home/edulodi/documents/videos"
@@ -52,7 +53,7 @@ def append_to_csv(csv_path, encoder, qp_value, video_name, psnr_value, br_value,
         writer_object = writer(csv_list)
         writer_object.writerow([encoder, qp_value, video_name, psnr_value, br_value,time_ms])
 
-def csv_to_lists(csv_path, list_qp): #returns 2 lists, the first one with the bitrates, and the second with the psnr
+def csv_to_lists(csv_path, video_name): #returns 2 lists, the first one with the bitrates, and the second with the psnr
     bitters = []
     psnrers = []
     with open(csv_path, 'r') as csv_input:
@@ -61,12 +62,13 @@ def csv_to_lists(csv_path, list_qp): #returns 2 lists, the first one with the bi
         for row in csv_reader:
             if line_count > 0:
                 if row != []:
-                    if int(row[1]) == list_qp:
-                        print(row[1])
+                    if row[2] == video_name:
                         bitters.append(row[4])
                         psnrers.append(row[3])
             line_count += 1
-    return bitters, psnrers
+    floats_bitters = [float(x) for x in bitters]
+    floats_psnrers = [float(x) for x in psnrers]         
+    return floats_bitters, floats_psnrers
 
 for video in videos:
     if (".y4m" not in video) and (".yuv" not in video):
@@ -76,7 +78,6 @@ for video in videos:
     base_yuv_name = video.split("_")[0]
 
     for qp in qps:
-        continue
 
         ##############################RODANDO SVT_AV1###########################################
         #output_path_svt = "/home/edulodi/SVT_AV1/output_files/svt_saida_%s_qp%s.txt" % (base_yuv_name, qp)
@@ -92,23 +93,40 @@ for video in videos:
         ########################################################################################
 
         ##############################RODANDO LIBAOM_AV1############################################
-        #output_path_libaom = "/home/edulodi/documents/output_aom/aom_saida_%s_qp%s.txt" % (base_yuv_name,qp)
-        #aom_parameters = " --limit=%i --psnr --cq-level=%s --frame-parallel=0 --cpu-used=1" % (FRAMES_AMNT, qp)
-        #aom_parameters += " -o /home/edulodi/documents/output_aom/aom_vid_saida_%s_qp%s.webm %s" % (base_yuv_name,qp, yuv_full_path)
-        #encode_cmd_aom = "%s %s > %s 2>&1" % (LIBAOM_AV1_PATH, aom_parameters, output_path_libaom)
-        #print(encode_cmd_aom)
-        #os.system(encode_cmd_aom)
-        #br_aom, psnr_aom, timems_aom = parse_aom_output(output_path_libaom)
-        #append_to_csv(LIBAOM_AV1_SAVES_PATH, 'AOM', qp, base_yuv_name, psnr_aom, br_aom, timems_aom)
+        output_path_libaom = "/home/edulodi/documents/output_aom/aom_saida_%s_qp%s.txt" % (base_yuv_name,qp)
+        aom_parameters = " --limit=%i --verbose --cq-level=%s --cpu-used=1" % (FRAMES_AMNT, qp)
+        aom_parameters += " -o /home/edulodi/documents/output_aom/aom_vid_saida_%s_qp%s.webm %s" % (base_yuv_name,qp, yuv_full_path)
+        encode_cmd_aom = "%s %s > %s 2>&1 " % (LIBAOM_AV1_PATH, aom_parameters, output_path_libaom)
+        print(encode_cmd_aom)
+        os.system(encode_cmd_aom)
+        br_aom, psnr_aom, timems_aom = parse_aom_output(output_path_libaom)
+        append_to_csv(LIBAOM_AV1_SAVES_PATH, 'AOM', qp, base_yuv_name, psnr_aom, br_aom, timems_aom)
         ########################################################################################
 
-br_22_svt , psnr_22_svt = csv_to_lists(SVT_AV1_SAVES_PATH,22)
-br_27_svt , psnr_27_svt = csv_to_lists(SVT_AV1_SAVES_PATH,27)
-br_32_svt , psnr_32_svt = csv_to_lists(SVT_AV1_SAVES_PATH,32)
-br_37_svt , psnr_37_svt = csv_to_lists(SVT_AV1_SAVES_PATH,37)
-br_22_aom , psnr_22_aom = csv_to_lists(LIBAOM_AV1_SAVES_PATH,22)
-br_27_aom , psnr_27_aom = csv_to_lists(LIBAOM_AV1_SAVES_PATH,27)
-br_32_aom , psnr_32_aom = csv_to_lists(LIBAOM_AV1_SAVES_PATH,32)
-br_37_aom , psnr_37_aom = csv_to_lists(LIBAOM_AV1_SAVES_PATH,37)
+#br_foreman_svt , psnr_foreman_svt = csv_to_lists(SVT_AV1_SAVES_PATH,"foreman")
+#br_akiyo_svt , psnr_akiyo_svt = csv_to_lists(SVT_AV1_SAVES_PATH,"akiyo")
+#br_flower_svt , psnr_flower_svt = csv_to_lists(SVT_AV1_SAVES_PATH,"flower")
+#br_carphone_svt , psnr_carphone_svt = csv_to_lists(SVT_AV1_SAVES_PATH,"carphone")
+#br_foreman_aom , psnr_foreman_aom = csv_to_lists(LIBAOM_AV1_SAVES_PATH,"foreman")
+#br_akiyo_aom , psnr_akiyo_aom = csv_to_lists(LIBAOM_AV1_SAVES_PATH,"akiyo")
+#br_flower_aom , psnr_flower_aom = csv_to_lists(LIBAOM_AV1_SAVES_PATH,"flower")
+#br_carphone_aom , psnr_carphone_aom = csv_to_lists(LIBAOM_AV1_SAVES_PATH,"carphone")
+#
+#print(br_foreman_svt,"\n",psnr_foreman_svt,"\n",br_foreman_aom,"\n",psnr_foreman_aom)
+#
+#bd_rate_foreman = bjoontegaard_metric.BD_PSNR(br_foreman_svt,psnr_foreman_svt,br_foreman_aom,psnr_foreman_aom)
+#bd_rate_akiyo = bjoontegaard_metric.BD_PSNR(br_akiyo_svt,psnr_akiyo_svt,br_akiyo_aom,psnr_akiyo_aom)
+#bd_rate_flower = bjoontegaard_metric.BD_PSNR(br_flower_svt , psnr_flower_svt,br_flower_aom , psnr_flower_aom)
+#bd_rate_carphone = bjoontegaard_metric.BD_PSNR(br_carphone_svt , psnr_carphone_svt,br_carphone_aom , psnr_carphone_aom)
+#
+#print(bd_rate_foreman, bd_rate_akiyo, bd_rate_flower, bd_rate_carphone)
 
-print(br_22_svt)
+#########################plotting###############################
+#x = ["foreman","akiyo","flower","carphone"]
+#y = [bd_rate_foreman, bd_rate_akiyo, bd_rate_flower, bd_rate_carphone]
+#
+#plt.plot(x,y)
+#plt.xlabel("QPs")
+#plt.ylabel("BD")
+#plt.title("BD_RATE AV1 - AOM x SVT")
+#plt.show()
