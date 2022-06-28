@@ -1,46 +1,0 @@
-Codec: AOMedia Project AV1 Encoder 3.3.0-708-g129203dd1
-Source file: /home/edulodi/documents/videos/foreman_qcif.y4m File Type: Y4M Format: I420
-Destination file: /home/edulodi/documents/output_aom/aom_vid_saida_foreman_qp32.webm
-Coding path: LBD
-Encoder parameters:
-    g_usage                      = 0
-    g_threads                    = 0
-    g_profile                    = 0
-    g_w                          = 176
-    g_h                          = 144
-    g_bit_depth                  = 8
-    g_input_bit_depth            = 8
-    g_timebase.num               = 1001
-    g_timebase.den               = 30000
-    g_error_resilient            = 0
-    g_pass                       = 0
-    g_lag_in_frames              = 35
-    large_scale_tile             = 0
-    rc_dropframe_thresh          = 0
-    rc_resize_mode               = 0
-    rc_resize_denominator        = 8
-    rc_resize_kf_denominator     = 8
-    rc_superres_mode             = 0
-    rc_superres_denominator      = 8
-    rc_superres_kf_denominator   = 8
-    rc_superres_qthresh          = 63
-    rc_superres_kf_qthresh       = 32
-    rc_end_usage                 = 0
-    rc_target_bitrate            = 256
-    rc_min_quantizer             = 0
-    rc_max_quantizer             = 63
-    rc_undershoot_pct            = 25
-    rc_overshoot_pct             = 25
-    rc_buf_sz                    = 6000
-    rc_buf_initial_sz            = 4000
-    rc_buf_optimal_sz            = 5000
-    rc_2pass_vbr_bias_pct        = 50
-    rc_2pass_vbr_minsection_pct  = 0
-    rc_2pass_vbr_maxsection_pct  = 2000
-    fwd_kf_enabled               = 0
-    kf_mode                      = 1
-    kf_min_dist                  = 0
-    kf_max_dist                  = 9999
-Pass 1/2 frame    1/0          0B       0 us 0.00 fpm [ETA  unknown] [KPass 1/2 frame    2/0          0B    6655 us 300.53 fps [ETA  unknown] [KPass 1/2 frame    3/0          0B    6749 us 444.51 fps [ETA  unknown] [KPass 1/2 frame    4/0          0B    6851 us 583.86 fps [ETA  unknown] [KPass 1/2 frame    5/0          0B    6947 us 719.74 fps [ETA  unknown] [K[KPass 1/2 frame    5/6       1296B    2073b/f   62127b/s   15384 us (325.01 fps)[K
-Pass 2/2 frame    1/0          0B   15385 us 65.00 fps [ETA  unknown] [KPass 2/2 frame    2/0          0B   20438 us 97.86 fps [ETA  unknown] [KPass 2/2 frame    3/0          0B   20545 us 146.02 fps [ETA  unknown] [KPass 2/2 frame    4/0          0B   20651 us 193.70 fps [ETA  unknown] [KPass 2/2 frame    5/0          0B   20752 us 240.94 fps [ETA  unknown] [K43.334 42.298 46.032 47.477    4319F[K42.522 41.341 46.020 47.714    2100F[K42.983 41.909 45.825 47.434       5F[K42.066 40.868 45.697 47.370     159F[K43.461 42.497 45.849 47.147      27F[K[KPass 2/2 frame    5/5       6610B   10576b/f  316963b/s 3690037 us (1.36 fps)[K
-Stream 0 PSNR (Overall/Avg/Y/U/V) 42.842 42.873 41.783 45.885 47.428  316963 bps    3690 ms

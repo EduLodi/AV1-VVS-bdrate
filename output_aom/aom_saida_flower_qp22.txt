@@ -1,46 +1,0 @@
-Codec: AOMedia Project AV1 Encoder 3.3.0-708-g129203dd1
-Source file: /home/edulodi/documents/videos/flower_cif.y4m File Type: Y4M Format: I420
-Destination file: /home/edulodi/documents/output_aom/aom_vid_saida_flower_qp22.webm
-Coding path: LBD
-Encoder parameters:
-    g_usage                      = 0
-    g_threads                    = 0
-    g_profile                    = 0
-    g_w                          = 352
-    g_h                          = 288
-    g_bit_depth                  = 8
-    g_input_bit_depth            = 8
-    g_timebase.num               = 1001
-    g_timebase.den               = 30000
-    g_error_resilient            = 0
-    g_pass                       = 0
-    g_lag_in_frames              = 35
-    large_scale_tile             = 0
-    rc_dropframe_thresh          = 0
-    rc_resize_mode               = 0
-    rc_resize_denominator        = 8
-    rc_resize_kf_denominator     = 8
-    rc_superres_mode             = 0
-    rc_superres_denominator      = 8
-    rc_superres_kf_denominator   = 8
-    rc_superres_qthresh          = 63
-    rc_superres_kf_qthresh       = 32
-    rc_end_usage                 = 0
-    rc_target_bitrate            = 256
-    rc_min_quantizer             = 0
-    rc_max_quantizer             = 63
-    rc_undershoot_pct            = 25
-    rc_overshoot_pct             = 25
-    rc_buf_sz                    = 6000
-    rc_buf_initial_sz            = 4000
-    rc_buf_optimal_sz            = 5000
-    rc_2pass_vbr_bias_pct        = 50
-    rc_2pass_vbr_minsection_pct  = 0
-    rc_2pass_vbr_maxsection_pct  = 2000
-    fwd_kf_enabled               = 0
-    kf_mode                      = 1
-    kf_min_dist                  = 0
-    kf_max_dist                  = 9999
-Pass 1/2 frame    1/0          0B       0 us 0.00 fpm [ETA  unknown] [KPass 1/2 frame    2/0          0B    9519 us 210.11 fps [ETA  unknown] [KPass 1/2 frame    3/0          0B    9799 us 306.15 fps [ETA  unknown] [KPass 1/2 frame    4/0          0B   10024 us 399.04 fps [ETA  unknown] [KPass 1/2 frame    5/0          0B   10184 us 490.97 fps [ETA  unknown] [K[KPass 1/2 frame    5/6       1296B    2073b/f   62127b/s   59022 us (84.71 fps)[K
-Pass 2/2 frame    1/0          0B   59026 us 16.94 fps [ETA  unknown] [KPass 2/2 frame    2/0          0B   67760 us 29.52 fps [ETA  unknown] [KPass 2/2 frame    3/0          0B   67952 us 44.15 fps [ETA  unknown] [KPass 2/2 frame    4/0          0B   68150 us 58.69 fps [ETA  unknown] [KPass 2/2 frame    5/0          0B   68310 us 73.20 fps [ETA  unknown] [K29.844 28.671 32.838 35.734    7543F[K29.757 28.578 32.787 35.698    2524F[K29.794 28.625 32.791 35.601       5F[K29.514 28.312 32.736 35.564      87F[K29.530 28.342 32.624 35.522      28F[K[KPass 2/2 frame    5/5      10187B   16299b/f  488481b/s   19822 ms (0.25 fps)[K
-Stream 0 PSNR (Overall/Avg/Y/U/V) 29.686 29.688 28.506 32.755 35.624  488487 bps   19822 ms
