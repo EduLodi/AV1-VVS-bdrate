@@ -1,0 +1,33 @@
+Svt[info]: -------------------------------------------
+Svt[info]: SVT [version]:	SVT-AV1 Encoder Lib v1.1.0
+Svt[info]: SVT [build]  :	GCC 9.4.0	 64 bit
+Svt[info]: LIB Build date: Jun 20 2022 15:33:08
+Svt[info]: -------------------------------------------
+Svt[info]: Number of logical cores available: 1
+Svt[info]: Number of PPCS 37
+Svt[info]: [asm level on system : up to avx]
+Svt[info]: [asm level selected : up to avx]
+Svt[info]: -------------------------------------------
+Svt[info]: SVT [config]: main profile	tier (auto)	level (auto)
+Svt[info]: SVT [config]: width / height / fps numerator / fps denominator 		: 352 / 288 / 30000 / 1001
+Svt[info]: SVT [config]: bit-depth / color format / compressed 10-bit format		: 8 / YUV420 / 0
+Svt[info]: SVT [config]: preset / tune / pred struct 					: 10 / PSNR / random access
+Svt[info]: SVT [config]: gop size / mini-gop size / key-frame type 			: 161 / 16 / key frame
+Svt[info]: SVT [config]: BRC mode / rate factor 					: CRF / 32 
+Svt[info]: -------------------------------------------
+Encoding                  1        2        3        4        5
+SUMMARY --------------------------------- Channel 1  --------------------------------
+Total Frames		Frame Rate		Byte Count		Bitrate
+           5		29.97 fps		     48674		2334.02 kbps
+
+		Average PSNR (using per-frame PSNR)		|	Overall PSNR (using per-frame MSE)		|	Average SSIM
+Average QP	Y-PSNR		U-PSNR		V-PSNR		|	Y-PSNR		U-PSNR		V-PSNR		|	Y-SSIM	U-SSIM	V-SSIM
+      27.60	36.22 dB	40.15 dB	41.09 dB	|	36.08 dB	40.12 dB	41.08 dB	|	0.98195	0.98293	0.96808
+
+
+Channel 1
+Average Speed:		27.034 fps
+Total Encoding Time:	185 ms
+Total Execution Time:	195 ms
+Average Latency:	140 ms
+Max Latency:		184 ms

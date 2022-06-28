@@ -1,0 +1,11 @@
+Picture Number:    0	 QP:   10  [ PSNR-Y: 39.90 dB,	PSNR-U: 45.12 dB,	PSNR-V: 45.26 dB,	MSE-Y: 6.66,	MSE-U: 2.00,	MSE-V: 1.94,	SSIM-Y: 0.98835,	SSIM-U: 0.99199,	SSIM-V: 0.98598 ]	  33481 bytes
+Picture Number:    1	 QP:   22  [ PSNR-Y: 39.36 dB,	PSNR-U: 43.53 dB,	PSNR-V: 44.44 dB,	MSE-Y: 7.53,	MSE-U: 2.88,	MSE-V: 2.34,	SSIM-Y: 0.98895,	SSIM-U: 0.99076,	SSIM-V: 0.98406 ]	   5049 bytes
+Picture Number:    2	 QP:   19  [ PSNR-Y: 40.26 dB,	PSNR-U: 43.16 dB,	PSNR-V: 44.03 dB,	MSE-Y: 6.13,	MSE-U: 3.14,	MSE-V: 2.57,	SSIM-Y: 0.98865,	SSIM-U: 0.98978,	SSIM-V: 0.98269 ]	  11614 bytes
+Picture Number:    3	 QP:   22  [ PSNR-Y: 39.25 dB,	PSNR-U: 42.27 dB,	PSNR-V: 43.37 dB,	MSE-Y: 7.73,	MSE-U: 3.86,	MSE-V: 2.99,	SSIM-Y: 0.98650,	SSIM-U: 0.98887,	SSIM-V: 0.98056 ]	   9773 bytes
+Picture Number:    4	 QP:   16  [ PSNR-Y: 41.38 dB,	PSNR-U: 43.49 dB,	PSNR-V: 43.98 dB,	MSE-Y: 4.73,	MSE-U: 2.91,	MSE-V: 2.60,	SSIM-Y: 0.98917,	SSIM-U: 0.98964,	SSIM-V: 0.98248 ]	  19139 bytes
+
+SUMMARY ---------------------------------------------------------------------
+
+				Average PSNR (using per-frame PSNR)		|	Overall PSNR (using per-frame MSE)		|	Average SSIM
+Total Frames	Average QP  	Y-PSNR   	U-PSNR   	V-PSNR		| 	Y-PSNR   	U-PSNR   	V-PSNR   	|	Y-SSIM   	U-SSIM   	V-SSIM   	|	Bitrate
+         5  	   17.80    	40.03 dB	43.51 dB	44.22 dB  	|	39.97 dB	43.42 dB	44.17 dB 	|	0.98832 	0.99021 	0.98315		|	3790.90 kbps
