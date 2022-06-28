@@ -80,8 +80,8 @@ for video in videos:
     for qp in qps:
 
         ##############################RODANDO SVT_AV1###########################################
-        #output_path_svt = "/home/edulodi/SVT_AV1/output_files/svt_saida_%s_qp%s.txt" % (base_yuv_name, qp)
-        #output_path_svt_time = "/home/edulodi/SVT_AV1/output_files/svt_time_saida_%s_qp%s.txt" % (base_yuv_name, qp)
+        #output_path_svt = "/home/edulodi/SVT_AV1/output_svt/svt_saida_%s_qp%s.txt" % (base_yuv_name, qp)
+        #output_path_svt_time = "/home/edulodi/SVT_AV1/output_svt/svt_time_saida_%s_qp%s.txt" % (base_yuv_name, qp)
         #svt_parameters = " -i %s -n %i" % (yuv_full_path, FRAMES_AMNT)
         #svt_parameters += " --enable-stat-report 1 --stat-file %s --lp 1" % (output_path_svt)
         #svt_parameters += " --qp %s --max-qp %s --min-qp %s --rc 0" % (qp,qp,qp)
