@@ -1,0 +1,18 @@
+encoder, qp_value, video_name, psnr_value, br_value, time_ms
+
+SVT,22,foreman,40.45,465203.2,68.0
+SVT,27,foreman,39.19,379955.2,76.0
+SVT,32,foreman,38.0,304097.28,57.0
+SVT,37,foreman,36.59,233338.88,47.0
+SVT,22,akiyo,48.15,316569.6,34.0
+SVT,27,akiyo,46.98,266772.48,35.0
+SVT,32,akiyo,45.24,219248.64,37.0
+SVT,37,akiyo,43.68,183992.32,37.0
+SVT,22,flower,40.03,3881881.6,190.0
+SVT,27,flower,38.16,3117588.48,181.0
+SVT,32,flower,36.22,2390036.48,185.0
+SVT,37,flower,34.28,1871114.24,168.0
+SVT,22,carphone,40.42,454051.84,50.0
+SVT,27,carphone,39.04,358062.08,56.0
+SVT,32,carphone,37.89,278999.04,51.0
+SVT,37,carphone,36.62,216104.96,52.0
