@@ -5,8 +5,8 @@ import bjoontegaard_metric
 import matplotlib.pyplot as plt
 
 ###############################GENERAL CONSTANTS##################################
-YUV_PATH = #path to the folder containing the raw y4m videos
-FRAMES_AMNT = #number of frames to encode
+YUV_PATH = ''#path to the folder containing the raw y4m videos
+FRAMES_AMNT = ''#number of frames to encode
 ##################################################################################
 
 ##################################LIBAOM AV1 CONSTANTS############################
