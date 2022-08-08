@@ -76,8 +76,8 @@ class AV1Enc:
                 metrics_writer = csv.writer(metrics_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 metrics_writer.writerow([frame,vmaf,yxpsnr,uxpsnr,vxpsnr])
 
-bowing_path = '~/videocoding/videos/bowing_cif.y4m'
-configs_path = '/home/edulodi/videocoding/AV1-VVS-bdrate/XPSNR_VMAF_tests/configs.ini'
+bowing_path = '/home/edulodi/video-coding/VIDEOS2/bowing_pair/bowing_cif.y4m'
+configs_path = 'pyttests/ecl_configs.ini'
 
 bowing = AV1Enc(bowing_path, configs_path)
 bowing.svt_encdec()
