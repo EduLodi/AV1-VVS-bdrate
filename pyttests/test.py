@@ -33,6 +33,18 @@ class AV1Enc:
         outmetricscsv = fconfig.get('paths','svt_metricscsv')
         self.metrics_csv(outmetricscsv,outvmaf,outxpsnr,frames)
 
+    def aomencdec(self):
+        aompath = fconfig.get('paths', 'libaomenc')
+        options_aome = fconfig.get('paths', 'svt_enc_options')
+        encoded_out = fconfig.get('paths','aom_encoded_path')
+        cmdline = (aompath + ' ' + options_aome + ' -o ' + encoded_out + ' ' + self.raw)
+        print(cmdline)
+        aompath = fconfig.get('paths','libaomdec')
+        options_aomd = fconfig.get('paths', 'aom_dec_options')
+        decoded_out = fconfig.get('paths','aom_decoded_path')
+        cmdline = (aompath + ' ' + options_aomd + ' ' + encoded_out + ' -o ' + decoded_out)
+        print(cmdline)
+
 
     def yuvtoy4m(self,input,output):
         ffmpegpath = fconfig.get('paths','ffmpeg')
