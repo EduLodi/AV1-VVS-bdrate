@@ -4,12 +4,14 @@ import os
 import out_parsing
 class AV1Enc:
 
+    #init method, the rawvideo is a y4m file, the configs file is in the same directory as script
     def __init__(self, rawvideo, configs):
         global fconfig
         fconfig = configparser.ConfigParser()
         fconfig.read(configs)
         self.raw = rawvideo
 
+    #the SVT method, it encodes, decodes, and compares the two videos using the availabe metrics, the results are put together into a csv file 
     def svt_encdec(self):
         svtpath = fconfig.get('paths', 'svtav1enc')
         options_svte = fconfig.get('svt_ops', 'svt_enc_options')
@@ -33,6 +35,7 @@ class AV1Enc:
         outmetricscsv = fconfig.get('paths','svt_metricscsv')
         self.metrics_csv(outmetricscsv,outvmaf,outxpsnr,frames)
 
+    #the libaom method, does the same as the SVT one, the only difference being that the decoded aom output is already Y4M, so it doesn't need the yuvtoy4m method
     def aomencdec(self):
         aompath = fconfig.get('paths', 'libaomenc')
         options_aome = fconfig.get('paths', 'svt_enc_options')
@@ -44,8 +47,15 @@ class AV1Enc:
         decoded_out = fconfig.get('paths','aom_decoded_path')
         cmdline = (aompath + ' ' + options_aomd + ' ' + encoded_out + ' -o ' + decoded_out)
         print(cmdline)
+        outxpsnr = fconfig.get('paths','aomxpsnrout')
+        self.xpsnr(decoded_out,outxpsnr)
+        outvmaf = fconfig.get('paths','aomvmafout')
+        self.vmaf(decoded_out,outvmaf)
+        frames = int(fconfig.get('video_presets','nof_frames'))
+        outmetricscsv = fconfig.get('paths','svt_metricscsv')
+        self.metrics_csv(outmetricscsv,outvmaf,outxpsnr,frames)
 
-
+    #transforms yuv into y4m, the yuv specs need to be in the config file
     def yuvtoy4m(self,input,output):
         ffmpegpath = fconfig.get('paths','ffmpeg')
         input_path = input
@@ -59,6 +69,7 @@ class AV1Enc:
         print(cmdline)
         os.system(cmdline)
 
+    #computes xpsnr using ffmpeg
     def xpsnr(self, y4m_decoded, out_xpsnr):
         videoref = self.raw
         videodis = y4m_decoded
@@ -68,6 +79,7 @@ class AV1Enc:
         print(cmdline)
         os.system(cmdline)
 
+    #computes vmaf
     def vmaf(self, y4m_decoded, out_vmaf):
         videoref = self.raw
         videodis = y4m_decoded
@@ -77,6 +89,7 @@ class AV1Enc:
         print(cmdline)
         os.system(cmdline)
 
+    #puts the results from the previous calculated metrics into a single csv file
     def metrics_csv(self, outputcsv, inputvmaf, inputxpsnr, frames):
         with open(outputcsv, 'w', newline='') as metrics_file:
             metrics_writer = csv.writer(metrics_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -89,7 +102,7 @@ class AV1Enc:
                 metrics_writer.writerow([frame,vmaf,yxpsnr,uxpsnr,vxpsnr])
 
 bowing_path = '/home/edulodi/video-coding/VIDEOS2/bowing_pair/bowing_cif.y4m'
-configs_path = 'pyttests/ecl_configs.ini'
+configs_path = 'class_with_metrics/ecl_configs.ini'
 
 bowing = AV1Enc(bowing_path, configs_path)
 bowing.svt_encdec()
