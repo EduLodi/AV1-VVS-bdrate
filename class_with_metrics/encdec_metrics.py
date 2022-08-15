@@ -1,7 +1,7 @@
 import configparser
 import csv
 import os
-import out_parsing
+import class_with_metrics.metrics_outparse as metrics_outparse
 class AV1Enc:
 
     #init method, the rawvideo is a y4m file, the configs file is in the same directory as script
@@ -38,21 +38,21 @@ class AV1Enc:
     #the libaom method, does the same as the SVT one, the only difference being that the decoded aom output is already Y4M, so it doesn't need the yuvtoy4m method
     def aomencdec(self):
         aompath = fconfig.get('paths', 'libaomenc')
-        options_aome = fconfig.get('paths', 'svt_enc_options')
+        options_aome = fconfig.get('aom_ops', 'aom_enc_options')
         encoded_out = fconfig.get('paths','aom_encoded_path')
         cmdline = (aompath + ' ' + options_aome + ' -o ' + encoded_out + ' ' + self.raw)
-        print(cmdline)
+        os.system(cmdline)
         aompath = fconfig.get('paths','libaomdec')
-        options_aomd = fconfig.get('paths', 'aom_dec_options')
+        options_aomd = fconfig.get('aom_ops', 'aom_dec_options')
         decoded_out = fconfig.get('paths','aom_decoded_path')
         cmdline = (aompath + ' ' + options_aomd + ' ' + encoded_out + ' -o ' + decoded_out)
-        print(cmdline)
+        os.system(cmdline)
         outxpsnr = fconfig.get('paths','aomxpsnrout')
         self.xpsnr(decoded_out,outxpsnr)
         outvmaf = fconfig.get('paths','aomvmafout')
         self.vmaf(decoded_out,outvmaf)
         frames = int(fconfig.get('video_presets','nof_frames'))
-        outmetricscsv = fconfig.get('paths','svt_metricscsv')
+        outmetricscsv = fconfig.get('paths','aom_metricscsv')
         self.metrics_csv(outmetricscsv,outvmaf,outxpsnr,frames)
 
     #transforms yuv into y4m, the yuv specs need to be in the config file
@@ -95,14 +95,14 @@ class AV1Enc:
             metrics_writer = csv.writer(metrics_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             metrics_writer.writerow(['Frame', 'VMAF', 'Y_XPSNR', 'U_PSNR', 'V_PSNR'])
         for frame in range(frames):
-            vmaf = out_parsing.parse_vmaf_log(inputvmaf,frame)
-            yxpsnr, uxpsnr, vxpsnr = out_parsing.parse_xpsnr_log(inputxpsnr,frame)
+            vmaf = metrics_outparse.parse_vmaf_log(inputvmaf,frame)
+            yxpsnr, uxpsnr, vxpsnr = metrics_outparse.parse_xpsnr_log(inputxpsnr,frame)
             with open(outputcsv, mode='a') as metrics_file:
                 metrics_writer = csv.writer(metrics_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 metrics_writer.writerow([frame,vmaf,yxpsnr,uxpsnr,vxpsnr])
 
-bowing_path = '/home/edulodi/video-coding/VIDEOS2/bowing_pair/bowing_cif.y4m'
-configs_path = 'class_with_metrics/ecl_configs.ini'
+bowing_path = '/home/edulodi/videocoding/videos/small_bowing.y4m'
+configs_path = 'class_with_metrics/configs.ini'
 
 bowing = AV1Enc(bowing_path, configs_path)
-bowing.svt_encdec()
+bowing.aomencdec()

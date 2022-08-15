@@ -1,7 +1,7 @@
 import os
 import csv
 from csv import writer
-import bjoontegaard_metric
+import bdbr_calculator.bjoontegaard_metric as bjoontegaard_metric
 import matplotlib.pyplot as plt
 
 ###############################GENERAL CONSTANTS##################################
